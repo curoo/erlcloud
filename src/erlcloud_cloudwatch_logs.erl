@@ -599,6 +599,12 @@ put_logs_events(LogGroup, LogStream, SeqToken, Events, Config) ->
             Error
     end.
 
+req_logs_events(LogGroup, LogStream, undefined, Events) ->
+    [
+        {<<"logEvents">>, log_events(Events)},
+        {<<"logGroupName">>, LogGroup},
+        {<<"logStreamName">>, LogStream}
+    ];
 req_logs_events(LogGroup, LogStream, SeqToken, Events) ->
     [
         {<<"logEvents">>, log_events(Events)},
